@@ -14,10 +14,15 @@
   "scripts": {
     "eslint": "eslint src/** tests/**",
     "test": "todo",
-    "build": "babel ./src/ -d ./dist/",
-    "start": "npm src/server.js"
+    "build": "babel ./src/ -d ./dist/ && cp -R ./src/public ./dist && cp ./src/config.json ./dist",
+    "start": "node dist/server.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "4.16.4",
+    "nconf": "0.10.0",
+    "winston": "3.2.1",
+    "neode": "0.2.14"
+  },
   "devDependencies": {
     "babel-core": "6.26.3",
     "babel-cli": "6.26.0",

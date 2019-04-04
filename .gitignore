@@ -120,3 +120,6 @@ dist/
 
 # lock file
 package-lock.json
+
+# config file
+config.json
