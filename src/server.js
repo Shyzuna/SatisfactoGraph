@@ -1,3 +1,5 @@
+import './config/initConfig'
+
 import express from 'express';
 import nconf from 'nconf';
 import http from 'http';
@@ -6,38 +8,12 @@ import path from 'path';
 
 import ApiRoutes from './api/api';
 
-
 // May divide in multiples files
-
-// Logger
-winston.loggers.add('server', {
-  level: 'debug',
-  exitOnError: false,
-  transports: [
-    new winston.transports.Console({level: 'debug'})
-  ]
-});
-
 const logger = winston.loggers.get('server');
-console.log(logger.transports);
-// Configuration
-
-const defaultConf  = {
-  'server': {
-    'port': 8888,
-    'host': '127.0.0.1',
-    'env': 'dev'
-  }
-};
-
-// May add argv and env
-nconf.file({file: path.resolve(__dirname, '../config.json')});
-nconf.defaults(defaultConf);
 
 const PORT = nconf.get('server:port');
 const ENV  = nconf.get('server:env');
 const HOST = nconf.get('server:host');
-
 // Server
 const app = express();
 let server = http.createServer(app);
@@ -59,5 +35,3 @@ app.get('*', (req,res) => {
 server.listen(PORT, HOST, (err) => {
   logger.info('Server started on ' + HOST + ':' + PORT);
 });
-
-export default app;
